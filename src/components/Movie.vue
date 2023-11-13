@@ -7,6 +7,7 @@ export default {
     },
     data() {
         return {
+
         }
     },
     methods: {
@@ -20,7 +21,8 @@ export default {
 <template>
     <div class="">
         <div class="content--movie">
-            <figure :src="getImagePath(`${item.poster_path}`)" alt="">
+            <figure>
+                <img :src="getImagePath(`https://image.tmdb.org/t/p/w342${item.poster_path}`)" alt="#">
             </figure>
             <div>{{ item.title }}{{ item.name }}</div>
             <div>{{ item.original_title }}{{ item.original_name }}</div>
