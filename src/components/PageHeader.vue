@@ -13,6 +13,9 @@ export default {
 <template>
     <div>
         <header>
+            <div class="logo">
+                <h1>Boolfix</h1>
+            </div>
             <div class="input-container">
                 <input v-model="store.searchText" class="input__bar" type="text" placeholder="Cerca un film">
                 <button class="input__button" @click="$emit('button-clicked')"> Cerca </button>
@@ -24,10 +27,16 @@ export default {
 <style scoped lang="scss">
 header {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     background-color: #27292b;
     color: white;
     padding: 20px;
+
+    .logo {
+        h1 {
+            color: red;
+        }
+    }
 
     .input-container {
         display: flex;

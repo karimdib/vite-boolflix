@@ -7,22 +7,25 @@ export default {
     },
     data() {
         return {
-
         }
     },
     methods: {
         getImagePath: function (imgPath) {
             return new URL(imgPath, import.meta.url).href
+        },
+        changeNumToStar() {
+
         }
     }
 }
 </script>
 
 <template>
-    <div class="">
+    <div class="" @mouseover="$emit('showinfo', item)">
         <div class="content--movie">
             <figure>
-                <img :src="getImagePath(`https://image.tmdb.org/t/p/w342${item.poster_path}`)" alt="#">
+                <img class="bg-img" :src="getImagePath(`https://image.tmdb.org/t/p/w342${item.poster_path}`)" alt="#">
+                <div class="opacity"></div>
             </figure>
             <div>{{ item.title }}{{ item.name }}</div>
             <div>{{ item.original_title }}{{ item.original_name }}</div>
@@ -34,6 +37,19 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+figure {
+    .bg-img {
+        position: relative;
+
+        &:hover {
+            .opacity {
+                background-color: rgba(0, 0, 0, 0.5);
+                position: absolute;
+            }
+        }
+    }
+}
+
 .it {
     background-image: url(../img/it.svg);
     background-size: contain;
