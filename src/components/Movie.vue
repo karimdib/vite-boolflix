@@ -26,7 +26,7 @@ export default {
 </script>
 
 <template>
-    <div class="merda" @mouseover="$emit('showinfo', item)">
+    <div class="bg-hover" @mouseover="$emit('showinfo', item)">
         <div class="content--movie">
             <figure class="bg-img">
                 <img class="" :src="getImagePath(`https://image.tmdb.org/t/p/w342${item.poster_path}`)" alt="#">
@@ -37,14 +37,14 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.merda {
+.bg-hover {
     .bg-img {
         position: relative;
         z-index: 20;
 
         &:hover {
             .opacity {
-                background-color: rgba(0, 0, 0, 0.7);
+                background-color: rgba(0, 0, 0, 1);
                 position: absolute;
                 inset: 0;
                 z-index: 300;

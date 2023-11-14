@@ -53,16 +53,25 @@ export default {
                     <Movie @showinfo="infoCard" @mouseleave="removeInfoCard" :item="movie" />
                     <div class="info-card">
                         <div class="card__item">{{ title }}</div>
-                        <div class="card__item">{{ dataCard.original_title || dataCard.original_name }}</div>
+                        <!--<div class="card__item">{{ dataCard.original_title || dataCard.original_name }}</div>-->
                         <div class="card__item">
-                            <template v-for="n in 5" :key="n">
-                                <awesome-icon class="icon" v-if="n <= vote" icon="star" />
-                            </template>
+                            <span>
+                                Voto:
+                                <template v-for="n in 5" :key="n">
+                                    <awesome-icon class="icon" v-if="n <= vote" icon="star" />
+                                </template>
+                            </span>
                         </div>
+                        <span>
+                            Overview:
+                            <div class=" card__item">{{ dataCard.overview }}</div>
+                        </span>
                         <div class="card__item" id="language">
-                            <div
-                                :class="{ 'it': dataCard.original_language === 'it', 'en': dataCard.original_language === 'en' }">
-                            </div>
+                            <span>Language:
+                                <div
+                                    :class="{ 'it': dataCard.original_language === 'it', 'en': dataCard.original_language === 'en' }">
+                                </div>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -81,21 +90,22 @@ export default {
         .info-card {
             display: block;
             z-index: 100;
+            padding: 10px 0;
         }
     }
 }
 
 .card__item {
-    padding: 10px 0;
-    text-align: center;
-    font-size: 20px;
+    padding: 4px 0;
+    font-size: 12px;
 }
 
 .info-card {
+    padding: 20px 0;
     display: none;
     position: absolute;
-    top: 40%;
-    left: 50%;
+    top: 50%;
+    left: 40%;
     transform: translate(-50%, -50%);
     color: white;
 }
@@ -117,10 +127,6 @@ export default {
     background-repeat: no-repeat;
 }
 
-#language {
-    position: relative;
-    left: 40%;
-}
 
 .icon {
     color: yellow;
