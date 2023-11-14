@@ -20,27 +20,49 @@ export default {
         },
         removeInfoCard() {
             this.show = false
-        }
+        },
+
     },
-    mounted() {
-        console.log(this.movies)
+    computed: {
+        title() {
+            if (this.dataCard.title) {
+                return this.dataCard.title
+            } else {
+                return this.dataCard.name
+            }
+        },
+        original() {
+            if (this.dataCard.original_title) {
+                return this.dataCard.original_title
+            } else {
+                this.dataCard.original_name
+            }
+        },
+        vote() {
+            return Math.ceil(this.dataCard.vote_average / 2)
+        }
     }
 }
 </script>
 
 <template>
-    <div>
+    <div class="body">
         <div class="container">
             <div class="row">
-                <div v-for="(movie, i) in store.movies" key="i" class="col-3 ciao">
+                <div v-for="(movie, i) in store.movies" key="i" class="col-3 col-hover">
                     <Movie @showinfo="infoCard" @mouseleave="removeInfoCard" :item="movie" />
                     <div class="info-card">
-                        <div class="card__item">{{ dataCard.title }}{{ dataCard.name }}</div>
-                        <div class="card__item">{{ dataCard.original_title }}{{ dataCard.original_name }}</div>
-                        <div class="card__item">{{ dataCard.vote_average }}</div>
-                        <div class="card__item" id="ciao"
-                            :class="{ 'it': dataCard.original_language === 'it', 'en': dataCard.original_language === 'en' }">
-
+                        <div class="card__item">{{ title }}</div>
+                        <div class="card__item">{{ dataCard.original_title || dataCard.original_name }}</div>
+                        <div class="card__item">
+                            <template v-for="n in 5" :key="n">
+                                <awesome-icon class="icon" v-if="n <= vote" icon="star" />
+                            </template>
+                        </div>
+                        <div class="card__item" id="language">
+                            <div
+                                :class="{ 'it': dataCard.original_language === 'it', 'en': dataCard.original_language === 'en' }">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,27 +73,28 @@ export default {
 </template>
 
 <style scoped lang="scss" >
-.ciao {
+.col-hover {
     position: relative;
 
     &:hover {
 
         .info-card {
             display: block;
-
+            z-index: 100;
         }
     }
 }
 
 .card__item {
-    padding: 5px 0;
+    padding: 10px 0;
     text-align: center;
+    font-size: 20px;
 }
 
 .info-card {
     display: none;
     position: absolute;
-    top: 30%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
@@ -94,7 +117,12 @@ export default {
     background-repeat: no-repeat;
 }
 
-.blue {
-    color: blue;
+#language {
+    position: relative;
+    left: 40%;
+}
+
+.icon {
+    color: yellow;
 }
 </style>
